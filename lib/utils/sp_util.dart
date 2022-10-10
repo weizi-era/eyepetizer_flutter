@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///本地缓存管理类
-class CacheManager {
+class SPUtils {
   SharedPreferences? _preferences;
 
-  CacheManager._();
+  SPUtils._();
 
-  CacheManager._pre(SharedPreferences preferences) {
+  SPUtils._pre(SharedPreferences preferences) {
     _preferences = preferences;
   }
 
-  static CacheManager? _instance;
+  static SPUtils? _instance;
 
-  static CacheManager getInstance() {
-    _instance ??= CacheManager._();
+  static SPUtils getInstance() {
+    _instance ??= SPUtils._();
     return _instance!;
   }
 
   //预初始化，防止get时，SharedPreferences还未初始化完毕
-  static Future<CacheManager> preInit() async {
+  static Future<SPUtils> preInit() async {
     if (_instance == null) {
       var preferences = await SharedPreferences.getInstance();
-      _instance = CacheManager._pre(preferences);
+      _instance = SPUtils._pre(preferences);
     }
     return _instance!;
   }

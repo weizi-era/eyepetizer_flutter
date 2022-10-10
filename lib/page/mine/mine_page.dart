@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:eyepetizer_flutter/utils/cache_manager.dart';
+import 'package:eyepetizer_flutter/utils/sp_util.dart';
 import 'package:eyepetizer_flutter/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +26,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin 
 
   /// 获取缓存头像
   void _getAvatarPath() {
-    var userAvatarPath = CacheManager.getInstance().get<String>("user_avatar_path");
+    var userAvatarPath = SPUtils.getInstance().get<String>("user_avatar_path");
     if (userAvatarPath != null && userAvatarPath.isNotEmpty) {
       setState(() {
         _imageFile = File(userAvatarPath);
@@ -178,7 +178,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin 
         _imageFile = File(imageFile.path);
       });
       // 将图片的路径缓存起来
-      CacheManager.getInstance().set("user_avatar_path", _imageFile!.path);
+      SPUtils.getInstance().set("user_avatar_path", _imageFile!.path);
     }
   }
 
